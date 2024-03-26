@@ -59,28 +59,12 @@ public class AnimationManager : MonoBehaviour
                     // insert person in dictionary by name
                     Person p = new Person(name, lPref, lSide, currentPos);
                     lPeopleDict.Add(name, p);
-                    // if (lPeopleDict[name] == null){
-                    //     Debug.Log("Person is null");
-                    //     lPeopleDict[name] = p;
-                    // }
-                    // else
-                    //     lPeopleDict[name].SetPerson(name, lPref, lSide, currentPos);
-                    // if (lPeopleDict[name] == null)
-                    //     lPeopleDict[name] = new Person(name, lPref, lSide, currentPos);
-                    // else
-                    //     lPeopleDict[name].SetPerson(name, lPref, lSide, currentPos);
+                
                 }
                 else{
                     Debug.Log("Adding '" + name + "' to right side");
                     rPeopleDict.Add(name, new Person(name, lPref, rSide, currentPos));
-                    // if (rPeopleDict[name] == null)
-                    //     rPeopleDict[name] = new Person(name, lPref, rSide, currentPos);
-                    // else
-                    //     rPeopleDict[name].SetPerson(name, lPref, rSide, currentPos);
-                    // if (rPeopleDict[name] == null)
-                    //     rPeopleDict[name] = new Person(name, lPref, rSide, currentPos);
-                    // else
-                    //     rPeopleDict[name].SetPerson(name, lPref, rSide, currentPos);
+                    
                 }
                 currentPos.position = new Vector3(currentPos.position.x + verticalOffset, currentPos.position.y, currentPos.position.z);
             }
@@ -146,13 +130,7 @@ public class AnimationManager : MonoBehaviour
                 Debug.Log("Moving");
             }
         }
-        // foreach (string curPartner in )
-        // {
-        //     // trim last character
-        //     Person curPartnerObj = rPeopleDict[curPartner]; 
-        // // Calls coroutine to move person to partner
-        //     StartCoroutine(p.MoveToCoroutine(curPartnerObj.personObject));
-        // }
+        
         
     }
     // Update is called once per frame
