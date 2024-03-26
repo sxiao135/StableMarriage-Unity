@@ -60,8 +60,10 @@ public class Steps : ScriptableObject
             else
             {
                 string[] parts = lines[i].Split(':');
-                Debug.Log("Parts: " + parts[0] + " " + parts[1]);
                 string[] parts2 = parts[1].Split('-');
+                // Debug.Log("Parts: '" + parts2[0] + "' '" + parts2[1] + "' " + parts2[0].Length + " " + parts2[1].Length);
+                // Remove last character
+                parts2[1] = parts2[1].Substring(0, parts2[1].Length - 1);
                 if (parts[0].Contains("p"))
                 {
                     SetSteps("Propose", parts2[0], parts2[1], curRound);

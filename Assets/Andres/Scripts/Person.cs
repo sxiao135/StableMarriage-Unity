@@ -10,6 +10,10 @@ public class Person : MonoBehaviour
     public List<string> preferences;
     public int currentPreferenceIndex;
     public GameObject personObject;
+
+    private bool isMoving = false;
+    private GameObject target;
+    private Mover mover;
 // Constructor
     public Person(string name, List<string> preferences)
     {
@@ -27,6 +31,7 @@ public class Person : MonoBehaviour
         this.isEngaged = false;
         this.currentPreferenceIndex = 0;
         personObject = Instantiate(pObject, tPosition.position, tPosition.rotation);
+        mover = personObject.AddComponent<Mover>();
         // personObject.AddComponent<Person>();
         // personObject.GetComponent<Person>().pName = name;
         // personObject.GetComponent<Person>().preferences = preferences;
@@ -44,6 +49,7 @@ public class Person : MonoBehaviour
         this.isEngaged = false;
         this.currentPreferenceIndex = 0;
         personObject = Instantiate(personObject, tPosition.position, tPosition.rotation);
+        mover = personObject.AddComponent<Mover>();
         // personObject.AddComponent<Person>();
         // personObject.GetComponent<Person>().pName = name;
         // personObject.GetComponent<Person>().preferences = preferences;
@@ -59,21 +65,16 @@ public class Person : MonoBehaviour
     }
     public void MoveTo(GameObject target)
     {
-        // Move our position a step closer to the target.
-        float step = 1 * Time.deltaTime; // calculate distance to move
         // Look at
+        this.target = target;
         personObject.transform.LookAt(target.transform);
-        personObject.transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
+        mover.target = target;
+        mover.SetMove();
+        // personObject.transform.position = Vector3.MoveTowards(personObject.transform.position, target.transform.position, step);
     }
     // Update is called once per frame
     void Update()
     {
-        if (personObject != null)
-        {
-            // float newY = Mathf.Sin(Time.time) * 5.0f; // Adjust 5.0f for greater amplitude
-
-            // // Update the instantiated object's position
-            // personObject.transform.position = new Vector3(personObject.transform.position.x, newY, personObject.transform.position.z);
-        }
+     
     }
 }

@@ -36,12 +36,10 @@ public class AnimationManager : MonoBehaviour
             // Line format "A: 3,2,4,1,5" where A is the person and 3,2,4,1,5 are the preferences
             for (int i = 0; i < lines.Length; i++)
             {
-                Debug.Log("Line: " + lines[i]);
                 // Check if current line contains a separator
                 if (lines[i].Contains("-"))
                 {
                     isLeft = false;
-                    Debug.Log("Separator found, original x position: " + initialPosition.position.x + " z position: " + currentPos.position.z);
                     // Rotate 180
                     currentPos.Rotate(0, 180, 0);
                     currentPos.position = new Vector3(initialPosition.position.x, initialPosition.position.y, initialPosition.position.z + horizontalOffset);                    
@@ -50,23 +48,21 @@ public class AnimationManager : MonoBehaviour
                 string[] line = lines[i].Split(':');
                 string name = line[0];
                 string[] preferences = line[1].Split(',');
-                Debug.Log("Name: " + name);
                 List<string> lPref = new List<string>();
                 for (int j = 0; j < preferences.Length; j++)
                 {
                     lPref.Add(preferences[j]);
-                    Debug.Log("Preference: " + preferences[j]);
                 }
                 if(isLeft){
                     // insert person in dictionary by name
                     Person p = new Person(name, lPref, lSide, currentPos);
                     lPeopleDict.Add(name, p);
-                    if (lPeopleDict[name] == null){
-                        Debug.Log("Person is null");
-                        lPeopleDict[name] = p;
-                    }
-                    else
-                        lPeopleDict[name].SetPerson(name, lPref, lSide, currentPos);
+                    // if (lPeopleDict[name] == null){
+                    //     Debug.Log("Person is null");
+                    //     lPeopleDict[name] = p;
+                    // }
+                    // else
+                    //     lPeopleDict[name].SetPerson(name, lPref, lSide, currentPos);
                     // if (lPeopleDict[name] == null)
                     //     lPeopleDict[name] = new Person(name, lPref, lSide, currentPos);
                     // else
@@ -75,10 +71,10 @@ public class AnimationManager : MonoBehaviour
                 else{
                     Debug.Log("Adding '" + name + "' to right side");
                     rPeopleDict.Add(name, new Person(name, lPref, rSide, currentPos));
-                    if (rPeopleDict[name] == null)
-                        rPeopleDict[name] = new Person(name, lPref, rSide, currentPos);
-                    else
-                        rPeopleDict[name].SetPerson(name, lPref, rSide, currentPos);
+                    // if (rPeopleDict[name] == null)
+                    //     rPeopleDict[name] = new Person(name, lPref, rSide, currentPos);
+                    // else
+                    //     rPeopleDict[name].SetPerson(name, lPref, rSide, currentPos);
                     // if (rPeopleDict[name] == null)
                     //     rPeopleDict[name] = new Person(name, lPref, rSide, currentPos);
                     // else
@@ -92,7 +88,6 @@ public class AnimationManager : MonoBehaviour
             if (textFile == null) return;
             if(steps == null)
                 steps = ScriptableObject.CreateInstance<Steps>();
-            Debug.Log("Text file: " + textFile.text);
             steps.init(textFile.text);
             steps.PrintRounds();
         }
@@ -111,15 +106,6 @@ public class AnimationManager : MonoBehaviour
     }
     public void Propose(Steps.Step step){
         Debug.Log("Propose: " + step.Person + " to " + step.Partner);
-        // Print dictionary keys:
-        foreach (KeyValuePair<string, Person> kvp in lPeopleDict)
-        {
-            Debug.Log("Key = " + kvp.Key + ", Value = " + kvp.Value.name);
-        }
-        foreach (KeyValuePair<string, Person> kvp in rPeopleDict)
-        {
-            Debug.Log("Key = " + kvp.Key + ", Value = " + kvp.Value.name);
-        }
 
         // Get person from dictionary
         Person p = lPeopleDict[step.Person];
