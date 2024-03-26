@@ -63,6 +63,18 @@ public class Steps : ScriptableObject
                 string[] parts2 = parts[1].Split('-');
                 // Debug.Log("Parts: '" + parts2[0] + "' '" + parts2[1] + "' " + parts2[0].Length + " " + parts2[1].Length);
                 // Remove last character if it's not last line
+                if(parts[0].Contains("c")){
+                    //A chain contains multiple partners. c:D-3-1-2. For example, D is person, and "3-1-2" is a single string that goes in the 
+                    //partner field. The partners are separated by a dash.
+                    string partners = "";
+                    for (int j = 1; j < parts2.Length; j++)
+                    {
+                        partners += parts2[j];
+                        if (j != parts2.Length - 1) partners += "-";
+                    }
+                    parts2[1] = partners;
+                    SetSteps("Chain", parts2[0], parts2[1], curRound);
+                }
                 if (i != lines.Length - 1) parts2[1] = parts2[1].Substring(0, parts2[1].Length - 1);
                 if (parts[0].Contains("p"))
                 {
@@ -72,10 +84,7 @@ public class Steps : ScriptableObject
                 {
                     SetSteps("Unmatch", parts2[0], parts2[1], curRound);
                 }
-                else
-                {
-                    SetSteps("Chain", parts2[0], parts2[1], curRound);
-                }
+                
             }
         }
     }

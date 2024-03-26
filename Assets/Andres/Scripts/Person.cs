@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Person : MonoBehaviour
@@ -79,6 +80,26 @@ public class Person : MonoBehaviour
         mover.SetMove();
         // personObject.transform.position = Vector3.MoveTowards(personObject.transform.position, target.transform.position, step);
     }
+    // MoveTo implemented as coroutine with a wait for object to stop moving. Stops waiting when isMoving is false again. Can use a yield?
+    public IEnumerator MoveToCoroutine(GameObject target)
+    {
+        // Look at
+        this.target = target;
+        personObject.transform.LookAt(target.transform);
+        mover.target = target;
+        mover.SetMove();
+        // personObject.transform.position = Vector3.MoveTowards(personObject.transform.position, target.transform.position, step);
+        while(mover.GetIsMoving()){
+            yield return null;
+        }
+    }
+    public void SetColor(Color color, bool reset = false){
+        if(reset){
+            mover.ResetColor();
+        }
+        else mover.SetColor(color);
+
+    }
     public void Return(){
         mover.tpos = tpos;
         GameObject g = new GameObject();
@@ -89,6 +110,11 @@ public class Person : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
+        if(mover != null){
+            this.isMoving = mover.GetIsMoving();
+        }
+    }
+    public bool IsMoving(){
+        return isMoving;
     }
 }

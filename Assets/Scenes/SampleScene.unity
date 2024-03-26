@@ -215,13 +215,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.24838541, y: -0.40696034, z: 0.11985107, w: 0.87081784}
+  m_LocalPosition: {x: 5.89, y: 3.73, z: -5.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 32.015, y: -49.969, z: 0.444}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,11 +299,9 @@ MonoBehaviour:
   stepsFile: STEPS
   initialPosition: {fileID: 243090353}
   horizontalOffset: 6
-  verticalOffset: -1
-  lPeople: []
-  rPeople: []
+  verticalOffset: -2
   lSide: {fileID: 4203702885820432247, guid: e5d6184cab3084144976ab6d7bdb455b, type: 3}
-  rSide: {fileID: 4203702885820432247, guid: e5d6184cab3084144976ab6d7bdb455b, type: 3}
+  rSide: {fileID: 7833369486965688265, guid: f6ef456380b211149a5529c08b8cf26c, type: 3}
 --- !u!4 &400805163
 Transform:
   m_ObjectHideFlags: 0
@@ -437,6 +435,24 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!114 &503833787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510420996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66af583140b336d41a15e8c161e865ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pName: 
+  isEngaged: 0
+  matchedPerson: {fileID: 0}
+  preferences: []
+  currentPreferenceIndex: 0
+  personObject: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,6 +502,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1510420996 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4203702885820432247, guid: e5d6184cab3084144976ab6d7bdb455b,
+    type: 3}
+  m_PrefabInstance: {fileID: 4991303143797855761}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2034610044
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,7 +609,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -655,10 +677,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: The_Groom
       objectReference: {fileID: 0}
+    - target: {fileID: 4203702885820432247, guid: e5d6184cab3084144976ab6d7bdb455b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4203702885820432247, guid: e5d6184cab3084144976ab6d7bdb455b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 503833787}
   m_SourcePrefab: {fileID: 100100000, guid: e5d6184cab3084144976ab6d7bdb455b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -17,6 +17,8 @@ public class AnimationManager : MonoBehaviour
     // public Person[] rPeople;
     public GameObject lSide;
     public GameObject rSide;
+    public bool playAutomatically = false;
+    public bool isPlaying = false;
     private Steps steps;
     private AnimatorController controller;
     // Start is called before the first frame update
@@ -95,6 +97,7 @@ public class AnimationManager : MonoBehaviour
     [Button]
     public void NextStep(){
         // Get next step
+        isPlaying = true;
         Steps.Step step = steps.GetNextStep();
         if (step.Action == "Propose")
             Propose(step);
@@ -102,7 +105,6 @@ public class AnimationManager : MonoBehaviour
             Unmatch(step);
         else if (step.Action == "Chain")
             Chain(step);
-        
     }
     public void Propose(Steps.Step step){
         Debug.Log("Propose: " + step.Person + " to " + step.Partner);
@@ -110,6 +112,8 @@ public class AnimationManager : MonoBehaviour
         Person p = lPeopleDict[step.Person];
         // Get partner from dictionary
         Person partner = rPeopleDict[step.Partner];
+        p.SetColor(Color.green);
+        partner.SetColor(Color.green);
         // Move person to partner
         p.MoveTo(partner.personObject);
 
@@ -117,6 +121,9 @@ public class AnimationManager : MonoBehaviour
     public void Unmatch(Steps.Step step){
         Debug.Log("Unmatch: " + step.Person);
         Person p = lPeopleDict[step.Person];
+        Person oldPartner = rPeopleDict[step.Partner];
+        p.SetColor(Color.red, true);
+        p.SetColor(Color.red, true);
         p.Return();
     }
     public void Chain(Steps.Step step){
@@ -124,13 +131,35 @@ public class AnimationManager : MonoBehaviour
         // Get person from dictionary
         Person p = lPeopleDict[step.Person];
         // Get partner from dictionary
-        Person partner = lPeopleDict[step.Partner];
-        // Move person to partner
-        p.MoveTo(partner.personObject);
+        string[] partners = step.Partner.Split('-');
+        for (int i = 0; i < partners.Length; i++)
+        {
+            Debug.Log("Partner: " + partners[i] + " Length " + partners[i].Length);
+            if(i == partners.Length - 1)
+                partners[i] = partners[i].Substring(0, partners[i].Length - 1);
+            Person partner = rPeopleDict[partners[i]];
+            // Move person to partner
+            // p.MoveTo(partner.personObject);
+            StartCoroutine(p.MoveToCoroutine(partner.personObject));
+            while(p.IsMoving()){
+                // continue;
+                Debug.Log("Moving");
+            }
+        }
+        // foreach (string curPartner in )
+        // {
+        //     // trim last character
+        //     Person curPartnerObj = rPeopleDict[curPartner]; 
+        // // Calls coroutine to move person to partner
+        //     StartCoroutine(p.MoveToCoroutine(curPartnerObj.personObject));
+        // }
+        
     }
     // Update is called once per frame
     void Update()
     {
-        
+        if(playAutomatically && !isPlaying){
+            NextStep();
+        }
     }
 }

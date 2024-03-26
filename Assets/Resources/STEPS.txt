@@ -2,7 +2,7 @@ ROUND 0
 p:A-3
 p:B-5
 p:C-4
-p:D-1
+c:D-3-1
 u:B-5
 p:E-5
 ROUND 1
