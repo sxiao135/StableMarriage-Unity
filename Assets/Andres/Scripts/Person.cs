@@ -14,6 +14,9 @@ public class Person : MonoBehaviour
     private bool isMoving = false;
     private GameObject target;
     private Mover mover;
+    private Vector3 tpos;
+    private Quaternion tRot;
+    
 // Constructor
     public Person(string name, List<string> preferences)
     {
@@ -30,6 +33,8 @@ public class Person : MonoBehaviour
         this.preferences = preferences;
         this.isEngaged = false;
         this.currentPreferenceIndex = 0;
+        tpos = new Vector3(tPosition.position.x, tPosition.position.y, tPosition.position.z);
+        tRot = new Quaternion(tPosition.rotation.x, tPosition.rotation.y, tPosition.rotation.z, tPosition.rotation.w);
         personObject = Instantiate(pObject, tPosition.position, tPosition.rotation);
         mover = personObject.AddComponent<Mover>();
         // personObject.AddComponent<Person>();
@@ -46,6 +51,8 @@ public class Person : MonoBehaviour
         // this.name = name;
         this.pName = name;
         this.preferences = preferences;
+        tpos = new Vector3(tPosition.position.x, tPosition.position.y, tPosition.position.z);
+        tRot = new Quaternion(tPosition.rotation.x, tPosition.rotation.y, tPosition.rotation.z, tPosition.rotation.w);
         this.isEngaged = false;
         this.currentPreferenceIndex = 0;
         personObject = Instantiate(personObject, tPosition.position, tPosition.rotation);
@@ -71,6 +78,13 @@ public class Person : MonoBehaviour
         mover.target = target;
         mover.SetMove();
         // personObject.transform.position = Vector3.MoveTowards(personObject.transform.position, target.transform.position, step);
+    }
+    public void Return(){
+        mover.tpos = tpos;
+        GameObject g = new GameObject();
+        g.transform.SetPositionAndRotation(tpos, tRot);
+        personObject.transform.LookAt(g.transform.position);
+        mover.SetMove(false);
     }
     // Update is called once per frame
     void Update()

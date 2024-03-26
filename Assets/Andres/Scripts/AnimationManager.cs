@@ -98,23 +98,35 @@ public class AnimationManager : MonoBehaviour
         Steps.Step step = steps.GetNextStep();
         if (step.Action == "Propose")
             Propose(step);
-        // else if (step.Action == "Unmatch")
-        //     Unmatch(step);
-        // else if (step.Action == "Chain")
-        //     Chain(step);
+        else if (step.Action == "Unmatch")
+            Unmatch(step);
+        else if (step.Action == "Chain")
+            Chain(step);
         
     }
     public void Propose(Steps.Step step){
         Debug.Log("Propose: " + step.Person + " to " + step.Partner);
-
         // Get person from dictionary
         Person p = lPeopleDict[step.Person];
         // Get partner from dictionary
         Person partner = rPeopleDict[step.Partner];
         // Move person to partner
         p.MoveTo(partner.personObject);
-        // Move partner to person
-        // partner.MoveTo(p.personObject.transform.position);
+
+    }
+    public void Unmatch(Steps.Step step){
+        Debug.Log("Unmatch: " + step.Person);
+        Person p = lPeopleDict[step.Person];
+        p.Return();
+    }
+    public void Chain(Steps.Step step){
+        Debug.Log("Chain: " + step.Person + " to " + step.Partner);
+        // Get person from dictionary
+        Person p = lPeopleDict[step.Person];
+        // Get partner from dictionary
+        Person partner = lPeopleDict[step.Partner];
+        // Move person to partner
+        p.MoveTo(partner.personObject);
     }
     // Update is called once per frame
     void Update()
