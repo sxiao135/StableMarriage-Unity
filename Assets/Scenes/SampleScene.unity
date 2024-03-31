@@ -299,7 +299,7 @@ MonoBehaviour:
   stepsFile: STEPS
   initialPosition: {fileID: 243090353}
   horizontalOffset: 6
-  verticalOffset: -2
+  verticalOffset: -3
   lSide: {fileID: 4203702885820432247, guid: e5d6184cab3084144976ab6d7bdb455b, type: 3}
   rSide: {fileID: 7833369486965688265, guid: f6ef456380b211149a5529c08b8cf26c, type: 3}
   playAutomatically: 1

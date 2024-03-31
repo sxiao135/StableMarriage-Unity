@@ -20,6 +20,7 @@ public class AnimationManager : MonoBehaviour
     public bool playAutomatically = false;
     public bool isPlaying = false;
     private Steps steps;
+    private int currentStep = 0;
     private AnimatorController controller;
     // Start is called before the first frame update
     void Awake()
@@ -62,7 +63,7 @@ public class AnimationManager : MonoBehaviour
                 
                 }
                 else{
-                    Debug.Log("Adding '" + name + "' to right side");
+                    // Debug.Log("Adding '" + name + "' to right side");
                     rPeopleDict.Add(name, new Person(name, lPref, rSide, currentPos));
                     
                 }
@@ -75,7 +76,7 @@ public class AnimationManager : MonoBehaviour
             if(steps == null)
                 steps = ScriptableObject.CreateInstance<Steps>();
             steps.init(textFile.text);
-            steps.PrintRounds();
+            // steps.PrintRounds();
         }
     }
     [Button]
@@ -99,7 +100,7 @@ public class AnimationManager : MonoBehaviour
         p.SetColor(Color.green);
         partner.SetColor(Color.green);
         // Move person to partner
-        p.MoveTo(partner.personObject);
+        p.MoveTo(partner.personObject.GetComponent<TargetInfo>().GetTarget());
 
     }
     public void Unmatch(Steps.Step step){
@@ -116,21 +117,19 @@ public class AnimationManager : MonoBehaviour
         Person p = lPeopleDict[step.Person];
         // Get partner from dictionary
         string[] partners = step.Partner.Split('-');
+        p.SetColor(Color.blue);
+        TargetInfo[] targets = new TargetInfo[partners.Length];
         for (int i = 0; i < partners.Length; i++)
         {
             Debug.Log("Partner: " + partners[i] + " Length " + partners[i].Length);
-            if(i == partners.Length - 1)
-                partners[i] = partners[i].Substring(0, partners[i].Length - 1);
+            // if(i == partners.Length - 1)
+            //     partners[i] = partners[i].Substring(0, partners[i].Length - 1);
             Person partner = rPeopleDict[partners[i]];
+            targets[i] = partner.personObject.GetComponent<TargetInfo>();
             // Move person to partner
             // p.MoveTo(partner.personObject);
-            StartCoroutine(p.MoveToCoroutine(partner.personObject));
-            while(p.IsMoving()){
-                // continue;
-                Debug.Log("Moving");
-            }
         }
-        
+        p.StartChainMove(targets);
         
     }
     // Update is called once per frame
@@ -138,6 +137,10 @@ public class AnimationManager : MonoBehaviour
     {
         if(playAutomatically && !isPlaying){
             NextStep();
+            if(steps.IsLastStep()){
+                playAutomatically = false;
+                NextStep();
+            }
         }
     }
 }

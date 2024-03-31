@@ -61,6 +61,7 @@ public class Steps : ScriptableObject
             {
                 string[] parts = lines[i].Split(':');
                 string[] parts2 = parts[1].Split('-');
+                Debug.Log("Lines " + lines[i] + " parts2: " + parts2[0] + " " + parts2[1] + " " + parts2[1].Length);
                 // Debug.Log("Parts: '" + parts2[0] + "' '" + parts2[1] + "' " + parts2[0].Length + " " + parts2[1].Length);
                 // Remove last character if it's not last line
                 if(parts[0].Contains("c")){
@@ -75,7 +76,7 @@ public class Steps : ScriptableObject
                     parts2[1] = partners;
                     SetSteps("Chain", parts2[0], parts2[1], curRound);
                 }
-                if (i != lines.Length - 1) parts2[1] = parts2[1].Substring(0, parts2[1].Length - 1);
+                // if (i != lines.Length - 1) parts2[1] = parts2[1].Substring(0, parts2[1].Length - 1);
                 if (parts[0].Contains("p"))
                 {
                     SetSteps("Propose", parts2[0], parts2[1], curRound);
@@ -108,5 +109,8 @@ public class Steps : ScriptableObject
             CurrentRound++;
         }
         return step;
+    }
+    public bool IsLastStep(){
+        return CurrentRound == Rounds - 1 && CurrentStep == StepsPerRound[CurrentRound].Count - 1;
     }
 }
