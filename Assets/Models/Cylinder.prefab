@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a93d0bbb87c89c14b9b7fe8988d87bb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Offset: {x: 0, y: 0, z: -1.5}
+  Offset: {x: 0, y: 0, z: -2.85}
 --- !u!1001 &5139835729938736304
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81,17 +81,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e2b4c1e120eac594e8fc23603a82d86f,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e2b4c1e120eac594e8fc23603a82d86f,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e2b4c1e120eac594e8fc23603a82d86f,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e2b4c1e120eac594e8fc23603a82d86f,
         type: 3}

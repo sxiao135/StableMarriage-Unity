@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 using EasyButtons;
+using TMPro;
 
 public class AnimationManager : MonoBehaviour
 {
@@ -19,9 +20,12 @@ public class AnimationManager : MonoBehaviour
     public GameObject rSide;
     public bool playAutomatically = false;
     public bool isPlaying = false;
+    public TextMeshProUGUI text;
+    public TextMeshProUGUI roundText;
     private Steps steps;
     private int currentStep = 0;
     private AnimatorController controller;
+    public float speed = 5f;
     // Start is called before the first frame update
     void Awake()
     {
@@ -64,7 +68,9 @@ public class AnimationManager : MonoBehaviour
                 }
                 else{
                     // Debug.Log("Adding '" + name + "' to right side");
-                    rPeopleDict.Add(name, new Person(name, lPref, rSide, currentPos));
+                    Person p = new Person(name, lPref, rSide, currentPos);
+                    rPeopleDict.Add(name, p);
+                    // rPeopleDict.Add(name, new Person(name, lPref, rSide, currentPos));
                     
                 }
                 currentPos.position = new Vector3(currentPos.position.x + verticalOffset, currentPos.position.y, currentPos.position.z);
@@ -78,6 +84,8 @@ public class AnimationManager : MonoBehaviour
             steps.init(textFile.text);
             // steps.PrintRounds();
         }
+        roundText.text = "ROUNDS " + (steps.Rounds-1);
+        text.text = "Ready";
     }
     [Button]
     public void NextStep(){
@@ -93,8 +101,11 @@ public class AnimationManager : MonoBehaviour
     }
     public void Propose(Steps.Step step){
         Debug.Log("Propose: " + step.Person + " to " + step.Partner);
+        if(text != null) text.text = "Propose: " + step.Person + " to " + step.Partner;
         // Get person from dictionary
         Person p = lPeopleDict[step.Person];
+        p.SetMoverSpeed(speed);
+
         // Get partner from dictionary
         Person partner = rPeopleDict[step.Partner];
         p.SetColor(Color.green);
@@ -105,16 +116,19 @@ public class AnimationManager : MonoBehaviour
     }
     public void Unmatch(Steps.Step step){
         Debug.Log("Unmatch: " + step.Person);
+        if(text != null) text.text = "Unmatch: " + step.Person + " from " + step.Partner;
         Person p = lPeopleDict[step.Person];
+        p.SetMoverSpeed(speed);
         Person oldPartner = rPeopleDict[step.Partner];
-        p.SetColor(Color.red, true);
-        p.SetColor(Color.red, true);
+        p.SetColor(Color.red);
         p.Return();
     }
     public void Chain(Steps.Step step){
         Debug.Log("Chain: " + step.Person + " to " + step.Partner);
+        if(text != null) text.text = "Chain: " + step.Person + " to " + step.Partner;
         // Get person from dictionary
         Person p = lPeopleDict[step.Person];
+        p.SetMoverSpeed(speed);
         // Get partner from dictionary
         string[] partners = step.Partner.Split('-');
         p.SetColor(Color.blue);
@@ -129,17 +143,27 @@ public class AnimationManager : MonoBehaviour
             // Move person to partner
             // p.MoveTo(partner.personObject);
         }
-        p.StartChainMove(targets);
+        // Set person match to last partner
+        p.matchedPerson = rPeopleDict[partners[partners.Length - 1]];
+        p.StartChainMove(targets, p.matchedPerson.GetGameObject().GetComponent<Mover>());
         
+    }
+    public void TogglePlay(){
+        playAutomatically = !playAutomatically;
+    }
+    public void SetMoverSpeed(float speed){
+        this.speed = speed  * 1000;
     }
     // Update is called once per frame
     void Update()
     {
         if(playAutomatically && !isPlaying){
+            roundText.text = "Round " + steps.CurrentRound;
             NextStep();
             if(steps.IsLastStep()){
                 playAutomatically = false;
                 NextStep();
+                text.text = "Done";
             }
         }
     }

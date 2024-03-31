@@ -1,0 +1,23 @@
+ROUND 0
+p:A1-B7
+p:A10-B6
+p:A2-B5
+p:A3-B10
+u:A1-B7
+p:A4-B7
+p:A5-B4
+u:A10-B6
+p:A6-B6
+p:A7-B2
+u:A5-B4
+c:A8-B10-B4
+p:A9-B3
+ROUND 1
+u:A7-B2
+p:A1-B2
+c:A10-B5-B4-B8
+p:A5-B1
+u:A5-B1
+p:A7-B1
+ROUND 2
+c:A5-B10-B9

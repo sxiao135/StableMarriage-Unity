@@ -5,6 +5,9 @@
 [Bb]uild/
 [Bb]uilds/
 [Ll]ogs/
+Assets/AllIn1SpriteShader/
+Assets/BruteForce-GrassShader/
+Assets/Catartsys/
 # Visual Studio cache directory
 .vs/
 

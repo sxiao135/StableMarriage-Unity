@@ -10,15 +10,19 @@ public class Mover : MonoBehaviour
     public GameObject target;
     private bool isMoving = false;
     private bool isChainMoving = false;
-    private Renderer rend;
+    public Renderer rend;
     private Color originalColor;
-    public float speed = 300.28f;
+    public float speed = 3.28f;
     public Vector3 tpos;
     private AnimationManager animationManager;
     public TargetInfo[] targetInfo;
     private bool playChain;
+    private Mover matchedMover;
     private int curChainIndex = 0;
     public int time = 100;
+    public void SetMatchedMover(Mover mover){
+        matchedMover = mover;
+    } 
     // Start is called before the first frame update
     [Button]
     public void SetMove(bool setTpos = true){
@@ -84,6 +88,15 @@ public class Mover : MonoBehaviour
                     playChain = false;
                     animationManager.isPlaying = false;
                     curChainIndex = 0;
+                    isMoving = false;
+                    SetColor(Color.green);
+                    if (matchedMover != null){
+                        matchedMover.SetColor(Color.green);
+                    }
+                    else{
+                        Debug.Log("NO MATCHED MOVER");
+                    }
+                    Debug.Log("CHAIN_ARRIGVED2");
                 }
             }
         }
@@ -101,6 +114,7 @@ public class Mover : MonoBehaviour
                     playChain = false;
                     animationManager.isPlaying = false;
                     curChainIndex = 0;
+                    Debug.Log("CHAIN_ARRIGVED3");
                 }
             }
         }

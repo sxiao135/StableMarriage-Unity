@@ -110,6 +110,9 @@ public class Steps : ScriptableObject
         }
         return step;
     }
+    public int GetRound(){
+        return CurrentRound;
+    }
     public bool IsLastStep(){
         return CurrentRound == Rounds - 1 && CurrentStep == StepsPerRound[CurrentRound].Count - 1;
     }

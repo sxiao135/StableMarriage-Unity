@@ -41,6 +41,7 @@ public class Person : MonoBehaviour
         tpos = new Vector3(tPosition.position.x, tPosition.position.y, tPosition.position.z);
         tRot = new Quaternion(tPosition.rotation.x, tPosition.rotation.y, tPosition.rotation.z, tPosition.rotation.w);
         personObject = Instantiate(pObject, tPosition.position, tPosition.rotation);
+        personObject.name = name;
         mover = personObject.AddComponent<Mover>();
 
     }
@@ -60,9 +61,9 @@ public class Person : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    public void SetMoverSpeed(float mSpeed)
     {
-        
+        mover.speed = mSpeed;
     }
     public void MoveTo(GameObject target)
     {
@@ -96,13 +97,14 @@ public class Person : MonoBehaviour
             yield return null;
         }
     }
-    public void StartChainMove(TargetInfo[] targets){
+    public void StartChainMove(TargetInfo[] targets, Mover partner){
         // Debug.Log("Starting chain move " + targets.Length);
         // this.targets = targets;
         // isChainMoving = false;
         // playChain = true;
         // curChainIndex = 0;
         mover.targetInfo = targets;
+        mover.SetMatchedMover(partner);
         mover.SetChainMove();
         // MoveToChain(targets[curChainIndex++]);
 
@@ -148,5 +150,8 @@ public class Person : MonoBehaviour
     }
     public bool IsMoving(){
         return isMoving;
+    }
+    public GameObject GetGameObject(){
+        return personObject;
     }
 }
