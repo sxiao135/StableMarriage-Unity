@@ -5891,18 +5891,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbf9fdfcbeb19bc47a2147ba98fe426a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inFile: IN10
-  stepsFile: STEPS10
+  inFile: IN50
+  stepsFile: STEPS50
   initialPosition: {fileID: 1623580698}
-  horizontalOffset: 50
+  horizontalOffset: 150
   verticalOffset: -12
   lSide: {fileID: 4203702885820432247, guid: 77f2aafc40ae4bf45bd4c3b66bcf0e1d, type: 3}
-  rSide: {fileID: 7833369486965688265, guid: f6ef456380b211149a5529c08b8cf26c, type: 3}
+  rSide: {fileID: 7833369486965688265, guid: 84b329aee4e9b3d4d9f44b63711c7335, type: 3}
   playAutomatically: 0
   isPlaying: 0
   text: {fileID: 1983366346}
   roundText: {fileID: 1381610374}
-  speed: 10
+  speed: 1000
 --- !u!4 &936376083
 Transform:
   m_ObjectHideFlags: 0
@@ -6002,24 +6002,24 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.4
-  far clip plane: 130
+  near clip plane: 0.3
+  far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: -1
+  orthographic: 1
+  orthographic size: 165
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 309
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
-  m_TargetEye: 0
+  m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 0
+  m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!4 &963194228
@@ -6030,13 +6030,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.17828837, y: -0.41743192, z: 0.08389612, w: 0.8870881}
-  m_LocalPosition: {x: -2.21, y: 6.37, z: -9.19}
+  m_LocalRotation: {x: 0.65540016, y: 0, z: 0, w: 0.7552818}
+  m_LocalPosition: {x: -306.28, y: 182.8, z: 24.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1699550607}
-  m_LocalEulerAnglesHint: {x: 22.728, y: -50.4, z: 0}
+  m_LocalEulerAnglesHint: {x: 81.9, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7556,7 +7556,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: b907a8e822a41ea49acad7e5e1b026c5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
