@@ -93,6 +93,7 @@ public class Mover : MonoBehaviour
             if (time == 0){
                 isChainMoving = true;
                 curChainIndex++;
+                if(curChainIndex < targetInfo.Length) transform.LookAt(targetInfo[curChainIndex].GetTarget().transform);
                 time = 100;
                 if(curChainIndex >= targetInfo.Length){
                     playChain = false;
