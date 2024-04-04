@@ -20,6 +20,11 @@ public class Mover : MonoBehaviour
     private Mover matchedMover;
     private int curChainIndex = 0;
     public int time = 100;
+    public Animator animator;
+    public void WalkAnimation(bool isWalking){
+        // Set animation controller parameter to isWalking
+        animator.SetBool("isWalking", isWalking);
+    }
     public void SetMatchedMover(Mover mover){
         matchedMover = mover;
     } 
@@ -28,11 +33,13 @@ public class Mover : MonoBehaviour
     public void SetMove(bool setTpos = true){
         // isMoving = !isMoving;
         isMoving = true;
+        WalkAnimation(true);
         if (setTpos) tpos = target.transform.position;
     }
     public void ResetMove(){
         // isMoving = !isMoving;
         isMoving = false;
+        WalkAnimation(false);
         animationManager.isPlaying = false;
     }
     void Start()
@@ -45,6 +52,7 @@ public class Mover : MonoBehaviour
         if(rend == null){
             rend = GetComponentInChildren<Renderer>();
         }
+        animator = GetComponentInChildren<Animator>();
         originalColor = rend.material.color;
     }
     public void SetColor(Color color){
@@ -62,19 +70,21 @@ public class Mover : MonoBehaviour
         isChainMoving = true;
         playChain = true;
         isMoving = true;
+        WalkAnimation(true);
         // if (setTpos) tpos = target.transform.position;
     }
     
     // Update is called once per frame
     void Update()
     {
-        if(!playChain && isMoving){
+        if(!playChain && isMoving){ //Regular walk and unpaired mover
             this.transform.position = Vector3.MoveTowards(this.transform.position, tpos, speed * Time.deltaTime);
             if(this.transform.position == tpos){
                 Debug.Log("ARRIGVED");
                 transform.SetPositionAndRotation(tpos, new Quaternion(0, 0, 0, 0));
                 isMoving = false;
                 animationManager.isPlaying = false;
+                WalkAnimation(false);
             }
         }
         if (playChain && !isChainMoving && time > 0){
@@ -97,6 +107,7 @@ public class Mover : MonoBehaviour
                         Debug.Log("NO MATCHED MOVER");
                     }
                     Debug.Log("CHAIN_ARRIGVED2");
+                    WalkAnimation(false);
                 }
             }
         }
