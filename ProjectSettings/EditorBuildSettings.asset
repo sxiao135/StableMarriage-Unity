@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/MainMenu.unity
+    guid: 6191890e4b119e049a3a4acba043b5b6
+  - enabled: 1
+    path: Assets/Scenes/LARGE.unity
+    guid: e02c13c0b153a5443ab1f4bfb364f6e5
+  - enabled: 1
+    path: Assets/Scenes/01BruteForceGrassURP 1.unity
+    guid: bd4bf1906bda96f4a96bbd230f764abf
   m_configObjects: {}
